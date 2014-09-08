@@ -17,6 +17,11 @@ What's included?
  * Disable dynamic USB IDs for USB audio devices
  * Well tested: thousands hours of testing sessions in production
 
+Be CAREFULL!
+------------
+
+Some last commands in the howtos below will reboot your machine. SAVE your work before doing anything!
+
 
 To install my own stable RT kernel on Debian or Ubuntu
 -------------------------------------------------------
@@ -58,6 +63,7 @@ Usually, installing jackd will configure the audio group and high priorities:
 
 ```
 sudo apt-get install jackd
+sudo reboot
 ```
 
 If you want to get them by hand:

@@ -1,7 +1,7 @@
 linux-RT-config
 ===============
 
-a config file for compiling a fast Linux RT aka "realtime preemptible kernel" for audio and video workstations.
+a config file and howtos for compiling a fast Linux RT aka "realtime preemptible kernel" for audio and video workstations.
 
 Why?
 ----
@@ -18,8 +18,8 @@ What's included?
  * Well tested: thousands hours of testing sessions in production
 
 
-Install my own stable RT kernel on Debian or Ubuntu
------------------------------------------------------
+To install my own stable RT kernel on Debian or Ubuntu
+-------------------------------------------------------
 
 ```
 wget -O - http://debian.parisson.com/debian/conf/parisson.gpg.key | sudo apt-key add -
@@ -29,8 +29,8 @@ sudo apt-get install linux-image-3.10.10-amd64-yomguy-rt7 linux-headers-3.10.10-
 sudo reboot
 ```
 
-Compile your own RT kernel from source
---------------------------------------
+To compile your own RT kernel from source
+------------------------------------------
 
 ```
 sudo apt-get install kernel-package libncurses5-dev fakeroot wget xz-utils
@@ -51,8 +51,8 @@ sudo reboot
 
 Note you can do it with more recent kernels and RT patches, but the result is NOT guaranteed with my config.
 
-Get high audio priorities
--------------------------
+To get high audio priorities
+-----------------------------
 
 Usually, installing jackd will configure the audio group and high priorities:
 
@@ -64,12 +64,12 @@ If you want to get them by hand:
 
 ```
 sudo adduser $USER audio
-echo -e "@audio   -  rtprio     70\n@audio   -  memlock    unlimited" | sudo tee -a /etc/security/limits.d/audio.conf
+echo -e "@audio   -  rtprio     95\n@audio   -  memlock    unlimited" | sudo tee -a /etc/security/limits.d/audio.conf
 sudo reboot
 ```
 
-Test your RT capabilities
--------------------------
+To test your RT capabilities
+-----------------------------
 
 As explained here: https://rt.wiki.kernel.org/index.php/Cyclictest
 
@@ -81,6 +81,6 @@ make all
 ./cyclictest -t1 -p 80 -n -i 10000 -l 10000
 ```
 
-A good average score for RT capabilities is around 20.
+A good average score for RT capabilities is around 20 and the max not above 100.
 
 

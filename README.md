@@ -17,10 +17,15 @@ What's included?
  * Disable dynamic USB IDs for USB audio devices
  * Well tested: thousands hours of testing sessions in production
 
-Be CAREFULL!
-------------
+WARNING!
+--------
 
-Some last commands in the howtos below will reboot your machine. SAVE your work before doing anything!
+ * Some last commands in the howtos below will reboot your machine. SAVE your work before doing anything!
+ * Any new kernel installation will NOT remove the current one. So you can always go back to your stable kernel with the GRUB menu at boot. If the GRUB menu is not displayed at boot, please update the GRUB config before doing anything else:
+
+   ```
+sed -ie "s/GRUB\_TIMEOUT=.*/GRUB\_TIMEOUT=7/g" /etc/default/grub
+   ```
 
 
 To install my own stable RT kernel on Debian or Ubuntu

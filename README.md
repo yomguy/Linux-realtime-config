@@ -11,7 +11,7 @@ Many distributions come from RT kernels not as preemptible as needed for audio a
 What's included?
 ----------------
 
- * Full PREEMPT option (RT, 1000HZ, etc...)
+ * Full PREEMPT options (RT, 1000HZ, etc...)
  * All audio and (partially) video drivers enabled
  * Disable dynamic USB IDs for USB audio devices
  * Well tested: thousands hours of testing sessions in production

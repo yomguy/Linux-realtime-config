@@ -6,7 +6,7 @@ a config file for compiling a fast Linux RT aka "realtime preemptible kernel" fo
 Why?
 ----
 
-Many distributions come from RT kernels not as preemptible as needed for audio and video processes which require very high priorities.
+Many distributions come from RT kernels not as preemptible as needed for audio and video processes which require very high system priorities.
 
 
 What's included?
@@ -26,6 +26,7 @@ wget -O - http://debian.parisson.com/debian/conf/parisson.gpg.key | sudo apt-key
 echo "deb http://debian.parisson.com/debian/ stable main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
 sudo apt-get install linux-image-3.10.10-amd64-yomguy-rt7 linux-headers-3.10.10-amd64-yomguy-rt7
+sudo reboot
 ```
 
 Compile your own RT kernel from source
@@ -45,5 +46,41 @@ export CONCURRENCY_LEVEL=4
 make-kpkg --rootcmd fakeroot --initrd --revision=1 --append-to-version=-amd64-yomguy kernel_image kernel_headers
 cd ..
 sudo dpkg -i linux-image-3.10.10-amd64-yomguy-rt7_1_amd64.deb linux-headers-3.10.10-amd64-yomguy-rt7_1_amd64.deb
+sudo reboot
 ```
+
+Note you can do it with more recent kernels and RT patches, but the result is NOT guaranteed with my config.
+
+Get high audio priorities
+-------------------------
+
+Usually, installing jackd will configure the audio group and high priorities:
+
+```
+sudo apt-get install jackd
+```
+
+If you want to get them by hand:
+
+```
+sudo adduser $USER audio
+echo -e "@audio   -  rtprio     70\n@audio   -  memlock    unlimited" | sudo tee -a /etc/security/limits.d/audio.conf
+sudo reboot
+```
+
+Test your RT capabilities
+-------------------------
+
+As explained here: https://rt.wiki.kernel.org/index.php/Cyclictest
+
+```
+sudo apt-get install git gcc
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests.git 
+cd rt-tests
+make all
+./cyclictest -t1 -p 80 -n -i 10000 -l 10000
+```
+
+A good average score for RT capabilities is around 20.
+
 

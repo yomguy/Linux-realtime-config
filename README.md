@@ -6,30 +6,34 @@ a config file and some howtos to compile and install a fast Linux RT aka "realti
 Why?
 ----
 
-Many distributions come with partially (fake?) RT kernels not as preemptible as needed for audio and video processes which require very high system and hardware access priorities.
+Many distributions come with partially (fake?) realtime (RT) low latency kernels not as preemptible as needed for audio and video processes which require very high system and hardware access priorities. 
+
+Note that even fast realtime video operations need fast and stable audio device accesses.
 
 
 What's included?
 ----------------
 
- * Full PREEMPT options (RT, 1000HZ, etc...)
+ * Full PREEMPT options enabled (RT, 1000HZ, etc...)
  * All audio and many video drivers enabled
- * Disable dynamic USB IDs for USB audio devices
- * Well tested: thousands hours of testing sessions in production
+ * Dynamic USB IDs disabled
+ * Some personal tweaks ;)
+ * Well tested in production during thousands of hours on "24/24 7/7" systems
+
 
 WARNING!
 --------
 
  * Some last commands in the howtos below will reboot your machine. SAVE your work before doing anything!
- * Any new kernel installation will NOT remove the current one. So you can always go back to your stable kernel with the GRUB menu at boot. If the GRUB menu is not displayed at boot, please update the GRUB config before doing anything else:
+ * Any new kernel installation will NOT remove the current one. So you can always go back to your stable kernel with the GRUB menu at boot. BUT, if the GRUB menu is not displayed at boot time, please update the GRUB config before doing anything else:
 
    ```
 sudo sed -ie "s/GRUB\_TIMEOUT=.*/GRUB\_TIMEOUT=7/g" /etc/default/grub
    ```
 
 
-To install my own stable RT kernel on Debian or Ubuntu
--------------------------------------------------------
+To install my own stable RT kernel on Debian or Ubuntu (64 bits)
+----------------------------------------------------------------
 
 ```
 wget -O - http://debian.parisson.com/debian/conf/parisson.gpg.key | sudo apt-key add -

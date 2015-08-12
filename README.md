@@ -1,7 +1,7 @@
-linux-RT-config
-===============
+Linux-realtime-config
+======================
 
-a config file and some howtos to compile and install a fast Linux RT aka "realtime preemptible kernel" for audio and video workstations.
+Compile and install a fast Linux realtime preemptible kernel for audio and video workstations
 
 Why?
 ----

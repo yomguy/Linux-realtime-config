@@ -38,6 +38,7 @@ sudo apt-get install linux-image-3.10.10-amd64-yomguy-rt7 linux-headers-3.10.10-
 sudo reboot
 ```
 
+
 ## To compile your own RT kernel from source
 
 ```
@@ -59,6 +60,7 @@ sudo reboot
 
 Note you can do it with more recent kernels and RT patches, but the result is NOT guaranteed with my config.
 
+
 ## To get high audio priorities
 
 Usually, installing jackd will configure the audio group and high priorities:
@@ -75,6 +77,7 @@ sudo adduser $USER audio
 echo -e "@audio   -  rtprio     95\n@audio   -  memlock    unlimited" | sudo tee -a /etc/security/limits.d/audio.conf
 sudo reboot
 ```
+
 
 ## To test your RT capabilities
 

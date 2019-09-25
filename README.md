@@ -1,18 +1,15 @@
-Linux-realtime-config
-======================
+# Linux-realtime-config
 
 Compile and install a fast Linux realtime preemptible kernel for audio and video workstations
 
-Why?
-----
+## Why?
 
-Many distributions come with partially (fake?) realtime (RT) low latency kernels not as preemptible as needed for audio and video processes which require very high system and hardware access priorities. 
+Many distributions come with partially (fake?) realtime (RT) low latency kernels not as preemptible as needed for audio and video processes which require very high system and hardware access priorities.
 
 Note that even fast realtime video operations need fast and stable audio device accesses.
 
 
-What's included?
-----------------
+## What's included?
 
  * Full PREEMPT options enabled (RT, 1000HZ, etc...)
  * All audio and many video drivers enabled
@@ -21,19 +18,17 @@ What's included?
  * Well tested in production during thousands of hours on "24/24 7/7" systems
 
 
-WARNING!
---------
+## WARNING!
 
  * Some last commands in the howtos below will reboot your machine. SAVE your work before doing anything!
  * Any new kernel installation will NOT remove the current one. So you can always go back to your stable kernel with the GRUB menu at boot. BUT, if the GRUB menu is not displayed at boot time, please update the GRUB config before doing anything else:
 
-   ```
+```
 sudo sed -ie "s/GRUB\_TIMEOUT=.*/GRUB\_TIMEOUT=7/g" /etc/default/grub
-   ```
+```
 
 
-To install my own stable RT kernel on Debian or Ubuntu (64 bits)
-----------------------------------------------------------------
+## To install my own stable RT kernel on Debian or Ubuntu (64 bits)
 
 ```
 wget -O - http://debian.parisson.com/debian/conf/parisson.gpg.key | sudo apt-key add -
@@ -43,8 +38,7 @@ sudo apt-get install linux-image-3.10.10-amd64-yomguy-rt7 linux-headers-3.10.10-
 sudo reboot
 ```
 
-To compile your own RT kernel from source
-------------------------------------------
+## To compile your own RT kernel from source
 
 ```
 sudo apt-get install kernel-package libncurses5-dev fakeroot wget xz-utils
@@ -65,8 +59,7 @@ sudo reboot
 
 Note you can do it with more recent kernels and RT patches, but the result is NOT guaranteed with my config.
 
-To get high audio priorities
------------------------------
+## To get high audio priorities
 
 Usually, installing jackd will configure the audio group and high priorities:
 
@@ -83,14 +76,13 @@ echo -e "@audio   -  rtprio     95\n@audio   -  memlock    unlimited" | sudo tee
 sudo reboot
 ```
 
-To test your RT capabilities
------------------------------
+## To test your RT capabilities
 
 As explained here: https://rt.wiki.kernel.org/index.php/Cyclictest
 
 ```
 sudo apt-get install git gcc
-git clone git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests.git 
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests.git
 cd rt-tests
 make all
 ./cyclictest -t1 -p 80 -n -i 10000 -l 10000
